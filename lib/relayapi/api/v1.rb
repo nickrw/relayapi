@@ -12,7 +12,7 @@ class RelayAPI::API::V1 < RelayAPI::API::Base
       'endpoints' => {
         "#{pfx}/devices" => { 'methods' => ['GET'] },
         "#{pfx}/devices/:id" => { 'methods' => ['GET'] },
-        "#{pfx}/devices/:id/:state" => { 'methods' => ['POST']}
+        "#{pfx}/devices/:id/:state" => { 'methods' => ['PUT']}
       },
       'versions' => RelayAPI::API.versions.map { |version|
         {'name' => version['name'], 'path' => version['path']}
@@ -50,7 +50,7 @@ class RelayAPI::API::V1 < RelayAPI::API::Base
     }.to_json
   end
 
-  post '/devices/:id/:state/?' do
+  put '/devices/:id/:state/?' do
     content_type :json
     id = params[:id].to_i
     dev = device(id)
